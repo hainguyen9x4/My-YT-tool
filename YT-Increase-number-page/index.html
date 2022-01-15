@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increase</title>
+    <script>
+        var index = 0;
+        var day =1;
+        var arrGMT =[+07,-10,-09,-09,-08,-08,-08,-07,-07,-07,-07,-06,-06,-06,-05,-05,-05,-05,-05,-05,-05,-04,-04,-03,-03,-03,-03,-03,-03,-03,-02,00,00,00,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+02,+02,+02,+02,+02,+03,+03,+03,+03,+03,+03,+05,+05,+06,+07,+07,+08,+08,+08,+08,+08,+08,+08,+09,+09,+09,+09,+10,+10,+10,+11,+11,+11,+11,+12,+13,+13];
+//var arrGMT =[+07,-10,-09,-09,-08,-08,-08,-07,-07,-07,-07,-06,-06,-06,-05,-05,-05,-05,-05,-05,-05,-04,-04,-03,-03,-03,-03,-03,-03,-03,-02,00,00,00,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+02,+02,+02,+02,+02,+03,+03,+03,+03,+03,+03,+05,+05,+06,+07,+07,+08,+08,+08,+08,+08,+08,+08,+09,+09,+09,+09,+10,+10,+10,+11,+11,+11,+11,+12,+13,+13];
+        console.log(arrGMT);
+        function unique(arr) {
+            var newArr = []
+            for (var i = 0; i < arr.length; i++) {
+                if (newArr.indexOf(arr[i]) === -1) {
+                newArr.push(arr[i])
+                }
+            }
+            return newArr
+        }
+        var arr=unique(arrGMT).sort(function(a, b) {
+                                    return a - b;
+                                    });
+        console.log(arr.length);
+        console.log(arr);
+        var MuiGios = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+        function getNumberViaIndex(index){
+            switch(index){
+                case 0 : return 0;
+                case 1 : return 61;
+                case 2 : return 59;
+                case 3 : return -1;
+                case 4 : return 53;
+                case 5 : return 48;
+                case 6 : return 34;
+                case 7 : return 31;
+                case 8 : return -1;
+                case 9 : return 30;
+                case 10: return 23;
+                case 11: return 21;
+                case 12: return 15;
+                case 13: return 11;
+                case 14: return 7;
+                case 15: return 4;
+                case 16: return 2;
+                case 17: return 1;
+                case 18: return 83;
+                case 19: return 82;
+                case 20: return 78;
+                case 21: return 75;
+                case 22: return 71;
+                case 23: return 64;
+                default: return 0;
+            }
+        }
+        function myFunctionCopyTime() {
+            
+            var copyText = document.getElementById("myInput");
+            var timeText = document.getElementById("time");
+
+            /* Get the text field */
+            var index2 = getNumberViaIndex(index);
+            if(index2<0) {
+                index =index+1;
+                index2 = getNumberViaIndex(index);
+            }
+            copyText.setAttribute('value',index2);
+            document.getElementById('time').innerText =index+'h:00';
+            /* Select the text field */
+            copyText.select();
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+
+            if(index==24) {
+                index=-1;
+                copyText.setAttribute('value',0);
+                //Chon laij day
+                day=Number(day)+1;
+                //myFunctionCopyDay(day);
+                //myFunctionClearDay();
+                setDay(day);
+                console.log('index='+day);
+                navigator.clipboard.writeText(24);
+
+            }
+            index= index+1;
+        }
+        function myFunctionClearTime() {
+            index = 0;
+            /* Get the text field */
+            var copyText = document.getElementById("myInput");
+            /* Select the text field */
+            copyText.select();
+            copyText.setAttribute('value',index);
+
+        }
+        ///Day
+        function myFunctionCopyDay(day) {           
+        var copyDay = document.getElementById('day');
+            copyDay.select();
+            navigator.clipboard.writeText(copyDay.value);
+        }
+        function myFunctionClearDay() {
+        var copyDay = document.getElementById('day');
+            day = 1;
+            /* Get the text field */
+            /* Select the text field */
+            //copyDay.select();
+            copyDay.setAttribute('value', 1);
+        }
+        function setDay(day) {
+            var copyDay = document.getElementById('day');
+                copyDay.setAttribute('value', day);
+                
+            }
+        function myFunctionSetStartDay() {
+            var copyDay = document.getElementById('dayTemp');
+            
+            day =Number(copyDay.value);
+            console.log('start:'+day);
+            setDay(day);
+            }
+    </script>
+</head>
+<body>
+    <label for="" id="time">0</label><br/>
+    <!-- The text field -->
+<input type="text" value="0" id="myInput">
+
+<!-- The button used to copy the text -->
+<button onclick="myFunctionCopyTime()">Copy number</button>
+<button onclick="myFunctionClearTime()">Clear</button><br/><br/><br/>
+
+<label for="" >Day:</label>
+<input type="text" value="1" id="day">
+<button onclick="myFunctionCopyDay()">Copy Day</button>
+<button onclick="myFunctionClearDay()">Clear day</button><br/><br/><br/>
+
+<input type="text" value="1" id="dayTemp">
+<button onclick="myFunctionSetStartDay()">SetStart Day</button>
+</body>
+</html>
