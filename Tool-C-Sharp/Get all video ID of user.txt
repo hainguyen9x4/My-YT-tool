@@ -1,0 +1,20 @@
+    var arr2  = Array.from(document.getElementsByClassName('tiktok-video-item'));
+    var strLinks ='';
+    for (let index = 0; index < arr2.length; index++) {
+        const element = arr2[index];
+        //strLinks+=$(element).attr('data-video-id')+';';
+        strLinks+=element.getAttribute("data-video-id")+";";
+    }
+    console.log(strLinks);
+	
+	//code js for get all link form #tag screen// xem chinh xac class tiktok-yz6ijl-DivWrapper ??
+	var arr2  = Array.from(document.getElementsByClassName('tiktok-yz6ijl-DivWrapper'));
+    var strLinks ='';
+    for (let index = 0; index < arr2.length; index++) {
+        const element = arr2[index].getElementsByTagName('a')[0];
+        
+        strLinks+=element.getAttribute("href")+ ";";
+    }
+    console.log(strLinks);
+	
+	
