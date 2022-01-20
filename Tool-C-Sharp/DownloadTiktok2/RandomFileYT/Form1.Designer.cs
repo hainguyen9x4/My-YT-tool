@@ -46,6 +46,7 @@ namespace RandomFileYT
             this.lblStatus = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblComeBack = new System.Windows.Forms.Label();
+            this.btnResetAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnChon
@@ -201,11 +202,22 @@ namespace RandomFileYT
             this.lblComeBack.TabIndex = 15;
             this.lblComeBack.Text = "---";
             // 
+            // btnResetAll
+            // 
+            this.btnResetAll.Location = new System.Drawing.Point(375, 293);
+            this.btnResetAll.Name = "btnResetAll";
+            this.btnResetAll.Size = new System.Drawing.Size(135, 56);
+            this.btnResetAll.TabIndex = 16;
+            this.btnResetAll.Text = "ResetAll";
+            this.btnResetAll.UseVisualStyleBackColor = true;
+            this.btnResetAll.Click += new System.EventHandler(this.btnResetAll_Click);
+            // 
             // RandomFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 374);
+            this.Controls.Add(this.btnResetAll);
             this.Controls.Add(this.lblComeBack);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblStatus);
@@ -251,6 +263,7 @@ namespace RandomFileYT
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblComeBack;
+        private System.Windows.Forms.Button btnResetAll;
     }
 }
 

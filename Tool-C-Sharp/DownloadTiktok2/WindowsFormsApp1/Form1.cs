@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -121,14 +122,15 @@ namespace WindowsFormsApp1
             char splitChar;
             if (GetSplitChar(out splitChar))
             {
-                List<string> listUrls = urls.Split(splitChar).ToList();
+                string replacement = Regex.Replace(urls, @"\t|\n|\r", "");
+                List<string> listUrls = replacement.Split(splitChar).ToList();
                 int index = int.Parse(String.IsNullOrEmpty(txtStartNum.Text) ? "0" : txtStartNum.Text);
 
                 List<Thread> listThred = new List<Thread>();
-                for(var i = 0; i < numThread; i++)
+                for (var i = 0; i < numThread; i++)
                 {
                     Thread t1 = new Thread(() => { });
-                    t1.Name = "Thread"+(i+1).ToString();
+                    t1.Name = "Thread" + (i + 1).ToString();
                     listThred.Add(t1);
                 }
                 foreach (var url in listUrls)
@@ -142,7 +144,7 @@ namespace WindowsFormsApp1
                     index++;
                     if (hasFree)
                     {
-                        thred = new Thread(()=>Work(index, location, fileName,url));
+                        thred = new Thread(() => Work(index, location, fileName, url));
                         thred.Start();
                     }
                     else
@@ -150,10 +152,12 @@ namespace WindowsFormsApp1
                         Thread.Sleep(int.Parse(txtDelay.Text));
                         using (var client = new WebClient())
                         {
+
+                            string urlxx = ConvertLinkYouTubeToLinkDraw(url);
                             var name = location + fileName + "_" + index.ToString() + ".mp4";
                             try
                             {
-                                client.DownloadFile(url, name);
+                                client.DownloadFile(urlxx, name);
                             }
                             catch
                             {
@@ -165,14 +169,62 @@ namespace WindowsFormsApp1
                 }
             }
         }
+        private string ConvertLinkYouTubeToLinkDraw(string urlYoutube)
+        {
+            string urlAPT = @"https://api.youtubemultidownloader.com/video?url=";
+            string url = urlAPT + urlYoutube;
+            string ret = "";
+            if (!String.IsNullOrEmpty(url))
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Timeout = 60000;
+                request.Method = "POST";
+                request.ContentType = "application/json";
+
+                try
+                {
+                    using (Stream webStream = request.GetRequestStream())
+                    using (StreamWriter requestWriter = new StreamWriter(webStream, System.Text.Encoding.ASCII))
+                    {
+
+                    }
+                    WebResponse webResponse = request.GetResponse();
+                    using (Stream webStream = webResponse.GetResponseStream() ?? Stream.Null)
+                    using (StreamReader responseReader = new StreamReader(webStream))
+                    {
+                        string response = responseReader.ReadToEnd();
+                        var result = JsonConvert.DeserializeObject<YouTube>(response);
+                        if(result != null && result.format[0] !=null)
+                        {
+                            if (!String.IsNullOrEmpty(result.format[0].url))
+                            {
+                                return result.format[0].url;
+                            } else if (!String.IsNullOrEmpty(result.format[0].manifestUrl))
+                            {
+                                return result.format[0].manifestUrl;
+                            }
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.Out.WriteLine("-----------------");
+                    Console.Out.WriteLine(ex.Message);
+
+                }
+            }
+            return ret;
+        }
         private void Work(object index, object location, object fileName, object url)
         {
             using (var client = new WebClient())
             {
+                string urlxx = ConvertLinkYouTubeToLinkDraw((string)url);
                 string name = (string)location + (string)fileName + "_" + ((int)index).ToString() + ".mp4";
                 try
                 {
-                    client.DownloadFile((string)url, name);
+                    client.DownloadFile(urlxx, name);
                 }
                 catch
                 {
@@ -227,11 +279,16 @@ namespace WindowsFormsApp1
         private string ChooseFolder()
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.SelectedPath = txtFolderPath.Text;
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 return folderBrowserDialog1.SelectedPath;
             }
-            return null;
+            else
+            {
+
+            }
+            return txtFolderPath.Text;
         }
 
         private void btnBrowser_Click(object sender, EventArgs e)
@@ -317,6 +374,7 @@ namespace WindowsFormsApp1
             txtFolderPath.Text = @"D:\Youtube\";
             txtFileName.Text = "Funny-Cute";
             txtStartNum.Text = "1";
+            txtThread.Text = "5";
         }
     }
     [Serializable]
@@ -327,5 +385,20 @@ namespace WindowsFormsApp1
     public class Data
     {
         public string Play { get; set; }
+    }
+    //
+    [Serializable]
+    public class YouTube
+    {
+        public List<YTDataVideo> format { get; set; }
+    }
+    public class YTDataVideo
+    {
+       // public int id { get; set; }
+        //public int height { get; set; }
+        //public int width { get; set; }
+        //public int size { get; set; }
+        public string url { get; set; }
+        public string manifestUrl { get; set; }
     }
 }

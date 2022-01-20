@@ -215,22 +215,6 @@ namespace RandomFileYT
 
         private void cmbChannel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (currenIdChannel >= 0)
-            {
-
-                var confirmResult = MessageBox.Show("Do you want to SAVE the last time upload of this channel... ?",
-                 "Confirm Save!!",
-                 MessageBoxButtons.YesNo);
-                if (confirmResult == DialogResult.Yes)
-                {
-                    SaveLastTimeUploadOfChannel(currenIdChannel);
-                    ShowTheLastTime(currenIdChannel);
-                }
-                else
-                {
-                    // If 'No', do something here.
-                }
-            }
             currenIdChannel = cmbChannel.SelectedIndex;
             ShowTheLastTime(currenIdChannel);
             //
@@ -320,8 +304,32 @@ namespace RandomFileYT
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ReadLastTimeUploadOfChannel();
             SaveLastTimeUploadOfChannel(currenIdChannel);
             ShowTheLastTime(currenIdChannel);
+        }
+
+        private void btnResetAll_Click(object sender, EventArgs e)
+        {
+            var listFolders = new List<string>();
+            listFolders.Add(@"D:\Youtube\animalsTag");
+            listFolders.Add(@"D:\Youtube\CatsFunnyAnimal");
+            listFolders.Add(@"D:\Youtube\CuteGirl");
+            listFolders.Add(@"D:\Youtube\viral");
+
+            foreach (var item in listFolders )
+            {
+                DirectoryInfo d = new DirectoryInfo(item);
+                Files = d.GetFiles("*.mp4");
+                foreach (var f in Files)
+                {
+                    File.SetAttributes(f.FullName, FileAttributes.Normal);
+                }
+                if (filesSelecteds15 != null)
+                {
+                    filesSelecteds15.Clear();
+                }
+            }
         }
     }
 }
