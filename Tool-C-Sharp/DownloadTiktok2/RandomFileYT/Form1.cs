@@ -282,6 +282,7 @@ namespace RandomFileYT
             }
             try
             {
+                saveDatas.Clear();
                 foreach (string line in File.ReadLines(logFileName))
                 {
                     System.Console.WriteLine(line);
@@ -293,7 +294,7 @@ namespace RandomFileYT
                 }
                 if (counter < 5 && createNew == false)
                 {
-                    MessageBox.Show("Lack save data of some channel!!!");
+                    //MessageBox.Show("Lack save data of some channel!!!");
                 }
             }
             catch (Exception e)

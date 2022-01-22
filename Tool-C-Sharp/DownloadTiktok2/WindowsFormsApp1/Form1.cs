@@ -50,7 +50,7 @@ namespace WindowsFormsApp1
                 else if (rdioYouTube.Checked)
                 {
                     var numThread = int.Parse(txtThread.Text);
-                    DownloadFileYouTube(richTextBox1.Text, location, fileName, numThread);
+                    DownloadFileYouTube2(richTextBox1.Text, location, fileName, numThread);
                 }
             }
         }
@@ -169,6 +169,51 @@ namespace WindowsFormsApp1
                 }
             }
         }
+        private void DownloadFileYouTube2(string text, string location, string fileName, int numThread)
+        {
+            string urls = text;
+            char splitChar;
+            if (GetSplitChar(out splitChar))
+            {
+                string replacement = Regex.Replace(urls, @"\t|\n|\r", "");
+                List<string> listUrls = replacement.Split(splitChar).ToList();
+                int index = int.Parse(String.IsNullOrEmpty(txtStartNum.Text) ? "0" : txtStartNum.Text);
+
+                List<Thread> listThred = new List<Thread>();
+                for (var i = 0; i < numThread; i++)
+                {
+                    Thread t1 = new Thread(() => { });
+                    t1.Name = "Thread" + (i + 1).ToString();
+                    listThred.Add(t1);
+                }
+                foreach (var url in listUrls)
+                {
+                    if (string.IsNullOrEmpty(url))
+                    {
+                        continue;
+                    }
+                    //
+
+                    //
+                    Thread.Sleep(int.Parse(txtDelay.Text));
+                    using (var client = new WebClient())
+                    {
+
+                        string urlxx = ConvertLinkYouTubeToLinkDraw(url);
+                        var name = location + fileName + "_" + index.ToString() + ".mp4";
+                        try
+                        {
+                            client.DownloadFile(urlxx, name);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    index++;
+                }
+            }
+        }
         private string ConvertLinkYouTubeToLinkDraw(string urlYoutube)
         {
             string urlAPT = @"https://api.youtubemultidownloader.com/video?url=";
@@ -177,41 +222,38 @@ namespace WindowsFormsApp1
             if (!String.IsNullOrEmpty(url))
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                request.Timeout = 60000;
                 request.Method = "POST";
                 request.ContentType = "application/json";
+                //request.ContentLength = DATA.Length;
+                StreamWriter requestWriter = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII);
+                //requestWriter.Write(DATA);
+                requestWriter.Close();
 
                 try
                 {
-                    using (Stream webStream = request.GetRequestStream())
-                    using (StreamWriter requestWriter = new StreamWriter(webStream, System.Text.Encoding.ASCII))
-                    {
-
-                    }
                     WebResponse webResponse = request.GetResponse();
-                    using (Stream webStream = webResponse.GetResponseStream() ?? Stream.Null)
-                    using (StreamReader responseReader = new StreamReader(webStream))
+                    Stream webStream = webResponse.GetResponseStream();
+                    StreamReader responseReader = new StreamReader(webStream);
+                    string response = responseReader.ReadToEnd();
+                    
+                    var result = JsonConvert.DeserializeObject<YouTube>(response);
+                    if (result != null && result.format[0] != null)
                     {
-                        string response = responseReader.ReadToEnd();
-                        var result = JsonConvert.DeserializeObject<YouTube>(response);
-                        if(result != null && result.format[0] !=null)
+                        if (!String.IsNullOrEmpty(result.format[0].url))
                         {
-                            if (!String.IsNullOrEmpty(result.format[0].url))
-                            {
-                                return result.format[0].url;
-                            } else if (!String.IsNullOrEmpty(result.format[0].manifestUrl))
-                            {
-                                return result.format[0].manifestUrl;
-                            }
+                            return result.format[0].url;
                         }
-
+                        else if (!String.IsNullOrEmpty(result.format[0].manifestUrl))
+                        {
+                            return result.format[0].manifestUrl;
+                        }
                     }
+                    responseReader.Close();
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
                     Console.Out.WriteLine("-----------------");
-                    Console.Out.WriteLine(ex.Message);
-
+                    Console.Out.WriteLine(e.Message);
                 }
             }
             return ret;
