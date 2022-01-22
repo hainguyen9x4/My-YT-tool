@@ -237,7 +237,7 @@ namespace WindowsFormsApp1
                     string response = responseReader.ReadToEnd();
                     
                     var result = JsonConvert.DeserializeObject<YouTube>(response);
-                    if (result != null && result.format[0] != null)
+                    if (result != null && result.format != null && result.format[0] != null)
                     {
                         if (!String.IsNullOrEmpty(result.format[0].url))
                         {
