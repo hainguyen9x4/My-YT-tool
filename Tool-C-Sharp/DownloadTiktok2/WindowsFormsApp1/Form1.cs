@@ -35,6 +35,7 @@ namespace WindowsFormsApp1
                 try
                 {
                     System.IO.Directory.CreateDirectory(location);
+                    exists = true;
                 }
                 catch
                 {
@@ -183,32 +184,37 @@ namespace WindowsFormsApp1
                 for (var i = 0; i < numThread; i++)
                 {
                     Thread t1 = new Thread(() => { });
-                    t1.Name = "Thread" + (i + 1).ToString();
                     listThred.Add(t1);
                 }
+                var listDrawVideos = new List<String>();
                 foreach (var url in listUrls)
                 {
                     if (string.IsNullOrEmpty(url))
                     {
                         continue;
                     }
-                    //
-
-                    //
-                    Thread.Sleep(int.Parse(txtDelay.Text));
-                    using (var client = new WebClient())
+                    //Thread.Sleep(int.Parse(txtDelay.Text));
+                    string urlxx = ConvertLinkYouTubeToLinkDraw(url);
+                    if (!String.IsNullOrEmpty(urlxx))
                     {
-
-                        string urlxx = ConvertLinkYouTubeToLinkDraw(url);
-                        var name = location + fileName + "_" + index.ToString() + ".mp4";
-                        try
-                        {
-                            client.DownloadFile(urlxx, name);
-                        }
-                        catch
-                        {
-
-                        }
+                        listDrawVideos.Add(urlxx);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    bool b = false;
+                    Thread thred = CheckFreeThread2(listThred, out b);
+                    string name = location + fileName + "_" + index.ToString() + ".mp4";
+                    if (b)
+                    {
+                        thred = new Thread(() => Work2(urlxx, name, index));
+                        thred.Start();
+                    }
+                    else
+                    {
+                        Work2(urlxx, name, index);
+                        Thread.Sleep(int.Parse(txtDelay.Text));
                     }
                     index++;
                 }
@@ -241,11 +247,11 @@ namespace WindowsFormsApp1
                     {
                         if (!String.IsNullOrEmpty(result.format[0].url))
                         {
-                            return result.format[0].url;
+                            ret = result.format[0].url;
                         }
                         else if (!String.IsNullOrEmpty(result.format[0].manifestUrl))
                         {
-                            return result.format[0].manifestUrl;
+                            ret = result.format[0].manifestUrl;
                         }
                     }
                     responseReader.Close();
@@ -271,6 +277,33 @@ namespace WindowsFormsApp1
                 catch
                 {
 
+                }
+                Thread.Sleep(int.Parse(txtDelay.Text));
+            }
+        }
+        private void Work2(string urlxx,string name, int index)
+        {
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    client.DownloadFile(urlxx, name);
+                    if (lblDownloaded.InvokeRequired)
+                    {
+                        lblDownloaded.Invoke(new MethodInvoker(() =>
+                        {
+                            lblDownloaded.Text = index.ToString();
+                        }));
+                    }
+                    else
+                    {
+                        lblDownloaded.Text = index.ToString();
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("--Fail---");
+                    Console.WriteLine(urlxx);
                 }
                 Thread.Sleep(int.Parse(txtDelay.Text));
             }
