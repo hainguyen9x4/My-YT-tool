@@ -13,7 +13,7 @@ namespace RandomFileYT
         public RandomFile()
         {
             InitializeComponent();
-            this.FormClosing += Form1_FormClosing;
+            //this.FormClosing += Form1_FormClosing;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -86,12 +86,12 @@ namespace RandomFileYT
 
         private void btnChon_Click(object sender, EventArgs e)
         {
-            txtFolder.Text = ChooseFolder();
+            txtFolder.Text = ChooseFolder(txtChangeFolder.Text);
         }
-        private string ChooseFolder()
+        private string ChooseFolder(string pathx)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-            folderBrowserDialog1.SelectedPath = txtFolder.Text;
+            folderBrowserDialog1.SelectedPath = pathx;
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 return folderBrowserDialog1.SelectedPath;
@@ -100,7 +100,7 @@ namespace RandomFileYT
             {
 
             }
-            return txtFolder.Text;
+            return pathx;
         }
 
         private void txtNumber_KeyPress(object sender, KeyPressEventArgs e)
@@ -209,7 +209,9 @@ namespace RandomFileYT
         private void RandomFile_Load(object sender, EventArgs e)
         {
             txtFolder.Text = @"";
+            txtChangeFolder.Text = @"E:\Youtube";
             txtNumber.Text = "105";
+            txtChangeName.Text = "ChangeName-";
             ReadLastTimeUploadOfChannel();
         }
 
@@ -336,6 +338,84 @@ namespace RandomFileYT
                 if (filesSelecteds15 != null)
                 {
                     filesSelecteds15.Clear();
+                }
+            }
+        }
+
+        private void btnSelectFolder_Click(object sender, EventArgs e)
+        {
+            txtChangeFolder.Text = ChooseFolder(txtChangeFolder.Text);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DirectoryInfo d = new DirectoryInfo(txtChangeFolder.Text);
+
+            List<FileInfo> filesSelecteds = new List<FileInfo>();
+            Files = d.GetFiles("*.mp4");
+            List<int> numberLists = new List<int>();
+            numberLists.Clear();
+            if (Files.Length > 0)
+            {
+                for (int i = 0; i < Files.Length; i++)
+                {
+                    if (Files[i].Name.Substring(0, Files[i].Name.IndexOf('-') + 1) == txtChangeName.Text)
+                    {
+                        MessageBox.Show("Choose other name!");
+                        return;
+                    }
+                }
+                Random rand = new Random();
+                int iNumber = rand.Next(0, Files.Length);
+                string strName = "";
+                if (cb10Folders.Checked)
+                {
+                    string folderName = "";
+                    for (int index = 0; index < 10; index++)
+                    {
+                        folderName = txtChangeName.Text + index.ToString();
+                        //Create random file name
+                        numberLists.Clear();
+                        for (int i = 0; i < Files.Length; i++)
+                        {
+                            while (numberLists.Contains(iNumber))
+                                iNumber = rand.Next(0, Files.Length);
+                            numberLists.Add(iNumber);
+                            //
+                            string str = iNumber.ToString();
+                            strName = txtChangeName.Text + (iNumber < 10 ? "00" + str : iNumber < 100 ? "0" + str : str);
+                            //
+                            if (File.Exists(Files[i].FullName))
+                            {
+                                string newFolderName = txtChangeFolder.Text + @"\" + folderName;
+                                if (!Directory.Exists(newFolderName))
+                                {
+                                    System.IO.Directory.CreateDirectory(newFolderName);
+                                }
+                                File.Copy(Files[i].FullName, newFolderName + @"\" + strName + ".mp4", true);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //Create random file name
+                    for (int i = 0; i < Files.Length; i++)
+                    {
+                        while (numberLists.Contains(iNumber))
+                            iNumber = rand.Next(0, Files.Length);
+                        numberLists.Add(iNumber);
+                        //
+                        string str = iNumber.ToString();
+                        strName = txtChangeName.Text + (iNumber < 10 ? "00" + str : iNumber < 100 ? "0" + str : str);
+                        //
+                        if (File.Exists(Files[i].FullName))
+                        {
+                            //File.Copy(Files[i].FullName, Files[i].DirectoryName + @"\" + strName + ".mp4", true);
+                            System.IO.File.Move(Files[i].FullName, Files[i].DirectoryName + @"\" + strName + ".mp4");
+                            File.Delete(Files[i].FullName);
+                        }
+                    }
                 }
             }
         }
