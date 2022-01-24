@@ -239,7 +239,8 @@ namespace RandomFileYT
                 if (saveDatas.Count - 1 >= currenIdChannel)
                 {
                     int indexOf = saveDatas[currenIdChannel].IndexOf('-');
-                    lblLastTime.Text = saveDatas[currenIdChannel].Substring(indexOf + 1, saveDatas[currenIdChannel].Length - 1 - indexOf);
+                    //lblLastTime.Text = saveDatas[currenIdChannel].Substring(indexOf + 1, saveDatas[currenIdChannel].Length - 1 - indexOf);
+                    ShowTheLastTime(currenIdChannel);
                     DateTime lastTime = DateTime.Parse(lblLastTime.Text);
                     var deltaTime = DateTime.Now - lastTime;
                     if(deltaTime.TotalSeconds - 24 * 60 * 60 > 0)
@@ -260,10 +261,16 @@ namespace RandomFileYT
 
         private void ShowTheLastTime(int currenIdChannel)
         {
-            if (saveDatas.Count - 1 >= currenIdChannel)
+            int indexOf = 0;
+            for (int i = 0; i < saveDatas.Count; i++)
             {
-                int indexOf = saveDatas[currenIdChannel].IndexOf('-');
-                lblLastTime.Text = saveDatas[currenIdChannel].Substring(indexOf + 1, saveDatas[currenIdChannel].Length -1 - indexOf);
+                indexOf = saveDatas[i].IndexOf('-');
+                string str = saveDatas[i].Substring(0, indexOf);
+                if (int.Parse(str) == currenIdChannel)
+                {
+                    lblLastTime.Text = saveDatas[i].Substring(indexOf + 1, saveDatas[i].Length - 1 - indexOf);
+                    break;
+                }
             }
         }
 
