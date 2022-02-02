@@ -719,7 +719,7 @@ COMMENT : Dong cua so ne video updated
 Mouse : 845 : 524 : LeftButtonDown : 0 : 0 : 0
 DELAY : 72
 Mouse : 845 : 524 : LeftButtonUp : 0 : 0 : 0
-DELAY : 200
+DELAY : 500
 COMMENT : Filter draft
 Mouse : 337 : 271 : LeftButtonDown : 0 : 0 : 0
 DELAY : 88
