@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Increase</title>
+    <style>
+    body {
+        background-color: darkslategrey;
+    }
+    </style>
     <script>
         var index = 0;
         var day =1;
@@ -122,6 +127,13 @@
             console.log('start:'+day);
             setDay(day);
             }
+        function myFunctionCheckOK() {
+            var copyValueOK = document.getElementById('checkOK');
+            /* Select the text field */
+            copyValueOK.select();
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyValueOK.value);
+            }
     </script>
 </head>
 <body>
@@ -139,6 +151,9 @@
 <button onclick="myFunctionClearDay()">Clear day</button><br/><br/><br/>
 
 <input type="text" value="1" id="dayTemp">
-<button onclick="myFunctionSetStartDay()">SetStart Day</button>
+<button onclick="myFunctionSetStartDay()">SetStart Day</button><br/><br/>
+
+<input type="text" value="2022" id="checkOK">
+<button onclick="myFunctionCheckOK()">Check OK</button>
 </body>
 </html>
