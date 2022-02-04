@@ -20,10 +20,19 @@ window.onload = function(e){
     }else{
         channel.value = 'Funny';
     }
+    //
+    monthData = localStorage.getItem('YT_SaveMonth');
+    var month = document.getElementById('month');
+    if(monthData != null){
+        month.value = monthData;
+    }else{
+        month.value = '1';
+    }
 }
 var index = 0;
 var day = 1;
 var chanel = 0;
+var targetMonth = 1;
 var arrGMT =[+07,-10,-09,-09,-08,-08,-08,-07,-07,-07,-07,-06,-06,-06,-05,-05,-05,-05,-05,-05,-05,-04,-04,-03,-03,-03,-03,-03,-03,-03,-02,00,00,00,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+02,+02,+02,+02,+02,+03,+03,+03,+03,+03,+03,+05,+05,+06,+07,+07,+08,+08,+08,+08,+08,+08,+08,+09,+09,+09,+09,+10,+10,+10,+11,+11,+11,+11,+12,+13,+13];
 //var arrGMT =[+07,-10,-09,-09,-08,-08,-08,-07,-07,-07,-07,-06,-06,-06,-05,-05,-05,-05,-05,-05,-05,-04,-04,-03,-03,-03,-03,-03,-03,-03,-02,00,00,00,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+02,+02,+02,+02,+02,+03,+03,+03,+03,+03,+03,+05,+05,+06,+07,+07,+08,+08,+08,+08,+08,+08,+08,+09,+09,+09,+09,+10,+10,+10,+11,+11,+11,+11,+12,+13,+13];
 //console.log(arrGMT);
@@ -147,6 +156,9 @@ function SaveToStorage(time, day, chanel){
     //Save Chanel
     var c = document.getElementById('Channel');
     localStorage.setItem("YT_SaveChanel", c.value);
+    //Save target month
+    var month = document.getElementById('month');
+    localStorage.setItem("YT_SaveMonth", month.value);
 }
 function determineChannel(){
     var c = document.getElementById('Channel');
@@ -155,4 +167,10 @@ function determineChannel(){
 function myFunctionResetAll(){
     localStorage.clear();
     location.reload();
+}
+function determineMonth(){
+    var today = new Date();
+    var mm = String(today.getMonth() + 1);
+    var nextNumber = document.getElementById('month').value - mm;
+    console.log(nextNumber);
 }
