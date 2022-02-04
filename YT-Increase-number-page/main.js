@@ -3,19 +3,24 @@ window.onload = function(e){
     //
     time = localStorage.getItem("YT_SaveTime");
     var TimeData = document.getElementById("myInputTime");
-    TimeData.setAttribute('value',time);
+    //console.log(time);
+    if(time){
+        TimeData.setAttribute('value',time);
+    }else{
+        TimeData.setAttribute('value',0);
+    }
     //
     day = localStorage.getItem("YT_SaveDay");
     var copyDay = document.getElementById('day');
-    if(day != null){
+    if(day){
         copyDay.setAttribute('value',day);
     }else{
-        copyDay.setAttribute('value','1');
+        copyDay.setAttribute('value',1);
     }
     //
     channelData = localStorage.getItem('YT_SaveChanel');
     var channel = document.getElementById('Channel');
-    if(channelData != null){
+    if(channelData){
         channel.value = channelData;
     }else{
         channel.value = 'Funny';
@@ -23,7 +28,7 @@ window.onload = function(e){
     //
     monthData = localStorage.getItem('YT_SaveMonth');
     var month = document.getElementById('month');
-    if(monthData != null){
+    if(monthData){
         month.value = monthData;
     }else{
         month.value = '1';
@@ -106,7 +111,7 @@ function myFunctionCopyTime() {
     }
     index = index+2;
     //Save data to local Storage
-    SaveToStorage(TimeData.value,day);
+    SaveToStorage();
 }
 function myFunctionClearTime() {
     index = 0;
@@ -148,16 +153,18 @@ function myFunctionCheckOK() {
     /* Copy the text inside the text field */
     navigator.clipboard.writeText(copyValueOK.value);
 }
-function SaveToStorage(time, day, chanel){
+function SaveToStorage(){
     //Save time
-    localStorage.setItem("YT_SaveTime", time);
+    let time = document.getElementById('myInputTime');
+    localStorage.setItem("YT_SaveTime", time.value);
     //Save Date
-    localStorage.setItem("YT_SaveDay", day);
+    let day = document.getElementById('day');
+    localStorage.setItem("YT_SaveDay", day.value);
     //Save Chanel
-    var c = document.getElementById('Channel');
+    let c = document.getElementById('Channel');
     localStorage.setItem("YT_SaveChanel", c.value);
     //Save target month
-    var month = document.getElementById('month');
+    let month = document.getElementById('month');
     localStorage.setItem("YT_SaveMonth", month.value);
 }
 function determineChannel(){
@@ -170,7 +177,43 @@ function myFunctionResetAll(){
 }
 function determineMonth(){
     var today = new Date();
-    var mm = String(today.getMonth() + 1);
-    var nextNumber = document.getElementById('month').value - mm;
+    var mm = today.getMonth() + 1;
+    var nextNumber = 0;
+    switch(parseInt(document.getElementById('month').value)){
+        case 5 :
+            nextNumber = document.getElementById('month').value - mm;
+             break;
+        case 6 :
+            nextNumber = document.getElementById('month').value - mm +1;
+            break;
+        case 7 :
+            nextNumber = document.getElementById('month').value - mm +2;
+            break;
+        case 8 :
+            nextNumber = document.getElementById('month').value - mm +3;
+            break;
+        case 9 :
+            nextNumber = document.getElementById('month').value - mm+3;
+            break;
+        case 10 :
+            nextNumber = document.getElementById('month').value - mm+4;
+            break;
+        case 11 :
+            nextNumber = document.getElementById('month').value - mm+5;
+            break;
+        case 12 :
+            nextNumber = document.getElementById('month').value - mm+6;
+            break;
+        default: break;
+    }
+    
+    navigator.clipboard.writeText(nextNumber);
     console.log(nextNumber);
+}
+function determineOFF(){
+    if(document.getElementById('turnOff').value === 'yes'){
+        navigator.clipboard.writeText('TURN OFF');
+    }else{
+        navigator.clipboard.writeText('');
+    }
 }
