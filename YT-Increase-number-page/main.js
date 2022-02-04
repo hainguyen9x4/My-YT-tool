@@ -33,11 +33,21 @@ window.onload = function(e){
     }else{
         month.value = '1';
     }
+    //
+    yearData = localStorage.getItem('YT_SaveYear');
+    var year = document.getElementById('year');
+    if(yearData){
+        year.value = yearData;
+    }else{
+        year.value = '2022';
+    }    
+    myFunctionDetermineEndDay();
 }
 var index = 0;
 var day = 1;
 var chanel = 0;
 var targetMonth = 1;
+var endDay = 0;
 var arrGMT =[+07,-10,-09,-09,-08,-08,-08,-07,-07,-07,-07,-06,-06,-06,-05,-05,-05,-05,-05,-05,-05,-04,-04,-03,-03,-03,-03,-03,-03,-03,-02,00,00,00,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+02,+02,+02,+02,+02,+03,+03,+03,+03,+03,+03,+05,+05,+06,+07,+07,+08,+08,+08,+08,+08,+08,+08,+09,+09,+09,+09,+10,+10,+10,+11,+11,+11,+11,+12,+13,+13];
 //var arrGMT =[+07,-10,-09,-09,-08,-08,-08,-07,-07,-07,-07,-06,-06,-06,-05,-05,-05,-05,-05,-05,-05,-04,-04,-03,-03,-03,-03,-03,-03,-03,-02,00,00,00,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+01,+02,+02,+02,+02,+02,+03,+03,+03,+03,+03,+03,+05,+05,+06,+07,+07,+08,+08,+08,+08,+08,+08,+08,+09,+09,+09,+09,+10,+10,+10,+11,+11,+11,+11,+12,+13,+13];
 //console.log(arrGMT);
@@ -125,7 +135,18 @@ function myFunctionClearTime() {
 function myFunctionCopyDay(day) {           
 var copyDay = document.getElementById('day');
     copyDay.select();
-    navigator.clipboard.writeText(copyDay.value);
+    if(parseInt(copyDay.value)>parseInt(endDay)){
+        //Chuyen thangs
+        navigator.clipboard.writeText('EndMonth');
+        //
+        let month = document.getElementById('month');
+        let number = parseInt(month.value)+1;
+        month.value = number;
+        copyDay.setAttribute('value','1');
+    }else{
+        navigator.clipboard.writeText(copyDay.value);
+
+    }
 }
 function myFunctionClearDay() {
 var copyDay = document.getElementById('day');
@@ -166,6 +187,9 @@ function SaveToStorage(){
     //Save target month
     let month = document.getElementById('month');
     localStorage.setItem("YT_SaveMonth", month.value);
+    //Save target year
+    let year = document.getElementById('year');
+    localStorage.setItem("YT_SaveYear", year.value);
 }
 function determineChannel(){
     var c = document.getElementById('Channel');
@@ -216,4 +240,49 @@ function determineOFF(){
     }else{
         navigator.clipboard.writeText('');
     }
+}
+function myFunctionDetermineEndDay(){
+    year = document.getElementById('year').value;
+    let month = document.getElementById('month').value;
+
+    endDay = 0;
+    switch(parseInt(month)){
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            endDay = 31;
+        break;
+        case 2:
+            if ((year % 400) == 0)
+                //Console.WriteLine("{0} la nam nhuan.\n", year);
+                endDay = 29;
+            else if ((year % 100) == 0)
+                //Console.WriteLine("{0} khong phai la nam nhuan.\n", year);
+                endDay = 28;
+            else if ((year % 4) == 0)
+                //Console.WriteLine("{0} la nam nhuan.\n", year);
+                endDay = 29;
+            else
+                //Console.WriteLine("{0} khong phai la nam nhuan.\n", year);
+                endDay = 28;
+        break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            endDay = 30;
+        break;        
+        default: break;
+    }
+    
+    //console.log(endDay);
+    document.getElementById('endDay').innerHTML = endDay;
+}
+function determineEndDay(){
+    myFunctionDetermineEndDay();
+    navigator.clipboard.writeText(document.getElementById('endDay').innerHTML);
 }
