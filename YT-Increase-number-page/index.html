@@ -8,6 +8,7 @@
     <style>
     body {
         background-color: darkslategrey;
+        color: yellow;
     }
     </style>
     <script src="main.js"></script>
@@ -29,7 +30,7 @@
 <input type="text" value="1" id="dayTemp">
 <button onclick="myFunctionSetStartDay()">SetStart Day</button><br/><br/>
 
-<label for="Channel">Choose a Channel:</label>
+<label for="Channel">Choose a Channel:</label><br/>
 <select name="Channel" id="Channel">
   <option value="Funny">Funny animal</option>
   <option value="Animation">Animation</option>
@@ -39,7 +40,9 @@
 </select>
 <button onclick="determineChannel()">Determaine channel</button><br/><br/>
 
+<button onclick="myFunctionResetAll()">Reset All</button><br/><br/>
+
 <input type="text" value="2022" id="checkOK">
-<button onclick="myFunctionCheckOK()">Check OK</button>
+<button onclick="myFunctionCheckOK()">Check is OK?</button>
 </body>
 </html>
