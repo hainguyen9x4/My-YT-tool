@@ -27,6 +27,6 @@ Mouse : 135 : 182 : Click : 0 : 0 : 0
 DELAY : 100
 ENDIF
 IF CLIPBOARD EQUALS : Smile : 0 : 0
-Mouse : 132 : 208 : Click : 0 : 0 : 0
+Mouse : 132 : 205 : Click : 0 : 0 : 0
 DELAY : 100
 ENDIF

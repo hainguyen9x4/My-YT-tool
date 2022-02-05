@@ -11,7 +11,7 @@ Mouse : 354 : 445 : Click : 0 : 0 : 0
 DELAY : 1300
 COMMENT : Chinh sua ban nhap
 Mouse : 1265 : 327 : Click : 0 : 0 : 0
-DELAY : 1500
+DELAY : 3000
 CLEAR CLIPBOARD
 COMMENT : Check valid-before-pressing-TIEP1
 IF PIXEL COLOR EQUALS : 1030 : 676 : 4105983 : 1
@@ -122,20 +122,25 @@ COMMENT : select time
 PLAY MACRO : function\Select-time-From-ClipBoard.mcr
 COMMENT : LEN LICH
 Mouse : 987 : 677 : Click : 0 : 0 : 0
-DELAY : 5000
-CLEAR CLIPBOARD
 DELAY : 50
+REPEAT : 7 : 0 : 0 : Enter the number of iterations: : 0 : 0
 COMMENT : Copy link of YT video
+CLEAR CLIPBOARD
 Mouse : 826 : 480 : Click : 0 : 0 : 0
 DELAY : 50
 COMMENT : Check clip Board
 IF CLIPBOARD EQUALS : https : 0 : 1
 COMMENT : CLOSE-Dong
 Mouse : 837 : 519 : Click : 0 : 0 : 0
-ELSE
+DELAY : 50
+EXIT LOOP
+ENDIF
+DELAY : 1000
+IF ITERATION EQUALS : 7 : 0
 COMMENT : if not youtube link
 COMMENT : Go to right channel
 PLAY MACRO : function\correct-the-right-channel.mcr
 DELAY : 10000
 ENDIF
+ENDREPEAT
 GOTO : Start
