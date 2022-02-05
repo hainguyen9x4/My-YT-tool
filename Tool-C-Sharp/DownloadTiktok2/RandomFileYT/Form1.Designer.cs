@@ -58,14 +58,15 @@ namespace RandomFileYT
             this.label14 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
             this.tabCreateDayMCR = new System.Windows.Forms.TabPage();
+            this.chkMove2EXE = new System.Windows.Forms.CheckBox();
+            this.dateMonth = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbStart = new System.Windows.Forms.ComboBox();
             this.btnBr2MCR = new System.Windows.Forms.Button();
             this.txtPathToMCR = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnEXE2MCR = new System.Windows.Forms.Button();
-            this.cmbStart = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.dateMonth = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -377,6 +378,7 @@ namespace RandomFileYT
             // 
             // tabCreateDayMCR
             // 
+            this.tabCreateDayMCR.Controls.Add(this.chkMove2EXE);
             this.tabCreateDayMCR.Controls.Add(this.dateMonth);
             this.tabCreateDayMCR.Controls.Add(this.label9);
             this.tabCreateDayMCR.Controls.Add(this.label8);
@@ -392,6 +394,60 @@ namespace RandomFileYT
             this.tabCreateDayMCR.TabIndex = 2;
             this.tabCreateDayMCR.Text = "Create Day MCR";
             this.tabCreateDayMCR.UseVisualStyleBackColor = true;
+            // 
+            // chkMove2EXE
+            // 
+            this.chkMove2EXE.AutoSize = true;
+            this.chkMove2EXE.Location = new System.Drawing.Point(8, 204);
+            this.chkMove2EXE.Name = "chkMove2EXE";
+            this.chkMove2EXE.Size = new System.Drawing.Size(118, 17);
+            this.chkMove2EXE.TabIndex = 19;
+            this.chkMove2EXE.Text = "Move to EXE folder";
+            this.chkMove2EXE.UseVisualStyleBackColor = true;
+            // 
+            // dateMonth
+            // 
+            this.dateMonth.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateMonth.Location = new System.Drawing.Point(8, 72);
+            this.dateMonth.Name = "dateMonth";
+            this.dateMonth.Size = new System.Drawing.Size(200, 20);
+            this.dateMonth.TabIndex = 18;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(5, 56);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(78, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Choose month:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(5, 105);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(44, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Start at:";
+            // 
+            // cmbStart
+            // 
+            this.cmbStart.FormattingEnabled = true;
+            this.cmbStart.Items.AddRange(new object[] {
+            "T2",
+            "T3",
+            "T4",
+            "T5",
+            "T6",
+            "T7",
+            "CN"});
+            this.cmbStart.Location = new System.Drawing.Point(8, 121);
+            this.cmbStart.Name = "cmbStart";
+            this.cmbStart.Size = new System.Drawing.Size(121, 21);
+            this.cmbStart.TabIndex = 14;
             // 
             // btnBr2MCR
             // 
@@ -432,50 +488,6 @@ namespace RandomFileYT
             this.btnEXE2MCR.Text = "Execute";
             this.btnEXE2MCR.UseVisualStyleBackColor = true;
             this.btnEXE2MCR.Click += new System.EventHandler(this.btnEXE2MCR_Click);
-            // 
-            // cmbStart
-            // 
-            this.cmbStart.FormattingEnabled = true;
-            this.cmbStart.Items.AddRange(new object[] {
-            "T2",
-            "T3",
-            "T4",
-            "T5",
-            "T6",
-            "T7",
-            "CN"});
-            this.cmbStart.Location = new System.Drawing.Point(8, 121);
-            this.cmbStart.Name = "cmbStart";
-            this.cmbStart.Size = new System.Drawing.Size(121, 21);
-            this.cmbStart.TabIndex = 14;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 105);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Start at:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(5, 56);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(78, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Choose month:";
-            // 
-            // dateMonth
-            // 
-            this.dateMonth.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateMonth.Location = new System.Drawing.Point(8, 72);
-            this.dateMonth.Name = "dateMonth";
-            this.dateMonth.Size = new System.Drawing.Size(200, 20);
-            this.dateMonth.TabIndex = 18;
             // 
             // RandomFile
             // 
@@ -539,6 +551,7 @@ namespace RandomFileYT
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbStart;
+        private System.Windows.Forms.CheckBox chkMove2EXE;
     }
 }
 
