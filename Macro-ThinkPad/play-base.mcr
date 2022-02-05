@@ -22,6 +22,15 @@ PLAY MACRO : D:\Youtube\My-YT-tool\Macro-ThinkPad\correct-the-right-channel.mcr
 DELAY : 7000
 GOTO : Start
 ENDIF
+COMMENT : Check valid-before-pressing-TIEP1
+IF PIXEL COLOR EQUALS : 1479 : 943 : 4105983 : 1
+COMMENT : Neu khong phai nut TIEP(check color)
+COMMENT : Go to right channel
+PLAY MACRO : D:\Youtube\My-YT-tool\Macro-ThinkPad\correct-the-right-channel.mcr
+DELAY : 10000
+COMMENT : Re-start-command
+GOTO : Start
+ENDIF
 COMMENT : Tiep 1
 Mouse : 1450 : 940 : Click : 0 : 0 : 0
 DELAY : 350
@@ -47,7 +56,7 @@ DELAY : 90
 COMMENT : Go back to TY tab
 Mouse : 43 : 22 : Click : 0 : 0 : 0
 DELAY : 90
-REPEAT : 0 : 0 : 1 : Enter the number of iterations: : 0 : 0
+REPEAT : 3 : 0 : 1 : Enter the number of iterations: : 0 : 0
 COMMENT : next-month
 PLAY MACRO : D:\Youtube\My-YT-tool\Macro-ThinkPad\next-month.mcr
 ENDREPEAT
