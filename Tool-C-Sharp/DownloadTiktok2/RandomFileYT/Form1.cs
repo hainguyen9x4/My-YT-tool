@@ -212,6 +212,7 @@ namespace RandomFileYT
             txtChangeFolder.Text = @"E:\Youtube";
             txtNumber.Text = "105";
             txtChangeName.Text = "ChangeName-";
+            txtPathToMCR.Text = @"D:\Youtube\My-YT-tool\Macro-ThinkPad 100\Data_Month";
             ReadLastTimeUploadOfChannel();
         }
 
@@ -418,6 +419,142 @@ namespace RandomFileYT
                     }
                 }
             }
+        }
+
+        private void btnBr2MCR_Click(object sender, EventArgs e)
+        {
+            txtPathToMCR.Text = ChooseFolder(txtPathToMCR.Text);
+        }
+
+        private void btnEXE2MCR_Click(object sender, EventArgs e)
+        {
+            //Create the locations
+            Location[,] Toado = new Location[6, 7];
+            int tempX = 417;
+            int tempY = 241;
+            for (int i = 0; i < 6; i++)//row
+            {
+                tempX = 417;
+                for (int j = 0; j < 7; j++)//column
+                {
+                    Toado[i,j] = new Location(tempX, tempY);
+                    tempX += 28;
+                }
+                tempY += 28;
+            }
+            // Get the number of day in month:
+            int days = DateTime.DaysInMonth(dateMonth.Value.Year, dateMonth.Value.Month);
+            //execute- the first
+            switch ((string)cmbStart.SelectedItem)
+            {
+                case "T2":
+                    for(int i = 0;i< 7; i++)
+                    {
+                        Toado[0, i] = null;
+                    }
+                    break;
+                case "T3":
+                    for (int i = 0; i < 7; i++)
+                    {
+                        Toado[0, i] = null;
+                    }
+                    Toado[1, 0] = null;
+                    break;
+                case "T4":
+                    for (int i = 0; i < 7; i++)
+                    {
+                        Toado[0, i] = null;
+                    }
+                    Toado[1, 0] = null;
+                    Toado[1, 1] = null;
+                    break;
+                case "T5":
+                    Toado[0, 0] = null;
+                    Toado[0, 1] = null;
+                    Toado[0, 2] = null;
+                    break;
+                case "T6":
+                    Toado[0, 0] = null;
+                    Toado[0, 1] = null;
+                    Toado[0, 2] = null;
+                    Toado[0, 3] = null;
+                    break;
+                case "T7":
+                    Toado[0, 0] = null;
+                    Toado[0, 1] = null;
+                    Toado[0, 2] = null;
+                    Toado[0, 3] = null;
+                    Toado[0, 4] = null;
+                    break;
+                case "CN":
+                    Toado[0, 0] = null;
+                    Toado[0, 1] = null;
+                    Toado[0, 2] = null;
+                    Toado[0, 3] = null;
+                    Toado[0, 4] = null;
+                    Toado[0, 5] = null;
+                    break;
+                default:break;
+            }
+
+            //execute- the end
+            List<Location> locations = new List<Location>();
+            int count = 0;
+            bool isFull = false;
+            for (int i = 0; i < 6; i++)//row
+            {
+                for (int j = 0; j < 7; j++)//column
+                {
+                    if(Toado[i, j] != null)
+                    {
+                        if (isFull)
+                        {
+                            Toado[i, j] = null;
+                        }
+                        else
+                        {
+                            locations.Add(Toado[i, j]);
+                            count++;
+                            if (count == days)
+                            {
+                                isFull = true;
+                            }
+                        }
+                    }
+                }
+            }
+            //Create files CMR
+            //Create folder for month:
+            string strFolder = txtPathToMCR.Text + @"\" + "T" + dateMonth.Value.Month.ToString() + @"\";
+            if (!System.IO.Directory.Exists(strFolder))
+                System.IO.Directory.CreateDirectory(strFolder);
+
+            string path = "";
+            int iTemp = 0;//row
+            int jTemp = 0;//column
+            for (int day = 1; day <= days; day++)
+            {
+                string strSaveData = "DELAY : 10" + Environment.NewLine + $"Mouse : {locations[day-1].X} : {locations[day - 1].Y} : Click : 0 : 0 : 0" + Environment.NewLine + "DELAY : 10";
+                path = strFolder + "d" + day.ToString() + ".mcr";
+                File.WriteAllText(path, strSaveData);
+                jTemp++;
+                if (jTemp == 7)
+                {
+                    iTemp++;
+                    jTemp = 0;
+                }
+            }
+        }
+
+    }
+    public class Location
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public Location(int x, int y)
+        {
+            X = x;
+            Y = y;
         }
     }
 }
