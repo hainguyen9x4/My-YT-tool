@@ -68,7 +68,7 @@ DELAY : 90
 COMMENT : Go back to TY tab
 Mouse : 38 : 16 : Click : 0 : 0 : 0
 DELAY : 90
-REPEAT : 2 : 0 : 1 : Enter the number of iterations: : 0 : 0
+REPEAT : 4 : 0 : 1 : Enter the number of iterations: : 0 : 0
 COMMENT : next-month
 PLAY MACRO : function\next-month.mcr
 ENDREPEAT

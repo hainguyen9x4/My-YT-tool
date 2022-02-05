@@ -1,3 +1,3 @@
-DELAY : 100
-Mouse : 414 : 270 : Click : 0 : 0 : 0
-DELAY : 100
+DELAY : 10
+Mouse : 417 : 269 : Click : 0 : 0 : 0
+DELAY : 10
