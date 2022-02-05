@@ -200,40 +200,7 @@ function myFunctionResetAll(){
     location.reload();
 }
 function determineMonth(){
-    var today = new Date();
-    var mm = today.getMonth() + 1;
-    var nextNumber = 0;
-    switch(parseInt(document.getElementById('month').value)){
-        case 4 :
-        case 5 :
-            nextNumber = document.getElementById('month').value - mm;
-             break;
-        case 6 :
-            nextNumber = document.getElementById('month').value - mm +1;
-            break;
-        case 7 :
-            nextNumber = document.getElementById('month').value - mm +2;
-            break;
-        case 8 :
-            nextNumber = document.getElementById('month').value - mm +3;
-            break;
-        case 9 :
-            nextNumber = document.getElementById('month').value - mm+3;
-            break;
-        case 10 :
-            nextNumber = document.getElementById('month').value - mm+4;
-            break;
-        case 11 :
-            nextNumber = document.getElementById('month').value - mm+5;
-            break;
-        case 12 :
-            nextNumber = document.getElementById('month').value - mm+6;
-            break;
-        default: break;
-    }
-    
-    navigator.clipboard.writeText(nextNumber);
-    console.log(nextNumber);
+    navigator.clipboard.writeText(document.getElementById('month').value);
 }
 function determineOFF(){
     if(document.getElementById('turnOff').value === 'yes'){
