@@ -257,11 +257,14 @@ function determineEndDay(){
 var count_restart =0;
 function myFunctionCountRestart(){
     count_restart++;
+    navigator.clipboard.writeText('');
     if(count_restart > 15){
         navigator.clipboard.writeText('NOT VALID!');
+    }else if(count_restart == 3){
+        navigator.clipboard.writeText('CheckHasVideo');
     }
 }
 function myFunctionResetCountRestart(){
-    count_restart=0;
+    count_restart = 0;
     navigator.clipboard.writeText('');
 }
