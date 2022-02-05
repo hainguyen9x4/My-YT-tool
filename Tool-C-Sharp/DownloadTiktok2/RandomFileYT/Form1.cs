@@ -212,7 +212,7 @@ namespace RandomFileYT
             txtChangeFolder.Text = @"E:\Youtube";
             txtNumber.Text = "105";
             txtChangeName.Text = "ChangeName-";
-            txtPathToMCR.Text = @"D:\Youtube\My-YT-tool\Macro-ThinkPad 100\Data_Month";
+            txtPathToMCR.Text = @"D:\Youtube\My-YT-tool\Macro-ThinkPad 100";
             ReadLastTimeUploadOfChannel();
         }
 
@@ -437,7 +437,7 @@ namespace RandomFileYT
                 tempX = 417;
                 for (int j = 0; j < 7; j++)//column
                 {
-                    Toado[i,j] = new Location(tempX, tempY);
+                    Toado[i, j] = new Location(tempX, tempY);
                     tempX += 28;
                 }
                 tempY += 28;
@@ -448,7 +448,7 @@ namespace RandomFileYT
             switch ((string)cmbStart.SelectedItem)
             {
                 case "T2":
-                    for(int i = 0;i< 7; i++)
+                    for (int i = 0; i < 7; i++)
                     {
                         Toado[0, i] = null;
                     }
@@ -494,7 +494,7 @@ namespace RandomFileYT
                     Toado[0, 4] = null;
                     Toado[0, 5] = null;
                     break;
-                default:break;
+                default: break;
             }
 
             //execute- the end
@@ -505,7 +505,7 @@ namespace RandomFileYT
             {
                 for (int j = 0; j < 7; j++)//column
                 {
-                    if(Toado[i, j] != null)
+                    if (Toado[i, j] != null)
                     {
                         if (isFull)
                         {
@@ -525,7 +525,7 @@ namespace RandomFileYT
             }
             //Create files CMR
             //Create folder for month:
-            string strFolder = txtPathToMCR.Text + @"\" + "T" + dateMonth.Value.Month.ToString() + @"\";
+            string strFolder = txtPathToMCR.Text + @"\Data_Month\" + "T" + dateMonth.Value.Month.ToString() + @"\";
             if (!System.IO.Directory.Exists(strFolder))
                 System.IO.Directory.CreateDirectory(strFolder);
 
@@ -534,7 +534,7 @@ namespace RandomFileYT
             int jTemp = 0;//column
             for (int day = 1; day <= days; day++)
             {
-                string strSaveData = "DELAY : 10" + Environment.NewLine + $"Mouse : {locations[day-1].X} : {locations[day - 1].Y} : Click : 0 : 0 : 0" + Environment.NewLine + "DELAY : 10";
+                string strSaveData = "DELAY : 10" + Environment.NewLine + $"Mouse : {locations[day - 1].X} : {locations[day - 1].Y} : Click : 0 : 0 : 0" + Environment.NewLine + "DELAY : 10";
                 path = strFolder + "d" + day.ToString() + ".mcr";
                 File.WriteAllText(path, strSaveData);
                 jTemp++;
@@ -544,6 +544,44 @@ namespace RandomFileYT
                     jTemp = 0;
                 }
             }
+            //Copy file to EXE folder
+            string strEXE_Folder = "";
+            if (chkMove2EXE.Checked)
+            {
+                strEXE_Folder = txtPathToMCR.Text + @"\EXE_DAY" + @"\";
+                if (!System.IO.Directory.Exists(strEXE_Folder))
+                    System.IO.Directory.CreateDirectory(strEXE_Folder);
+                //Copy
+                Copy(strFolder, strEXE_Folder, true);
+
+            }
+            //Delete old info file.
+            DirectoryInfo d = new DirectoryInfo(strEXE_Folder);
+            Files = d.GetFiles("*.txt");
+            foreach(var file in Files)
+            {
+                try
+                {
+                    file.Delete();
+                }
+                catch
+                {
+                    MessageBox.Show("The info file is oppen!");
+                }
+            }
+            //Create file info
+
+            path = strEXE_Folder + "0_Thang_" + dateMonth.Value.Month.ToString() + "info.txt";
+            string strInfoData = "Thang_" + dateMonth.Value.Month.ToString();
+            File.WriteAllText(path, strInfoData);
+        }
+        void Copy(string sourceDir, string targetDir, bool isOverwrite = false)
+        {
+            foreach (var file in Directory.GetFiles(sourceDir))
+                File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)), isOverwrite);
+
+            foreach (var directory in Directory.GetDirectories(sourceDir))
+                Copy(directory, Path.Combine(targetDir, Path.GetFileName(directory)), isOverwrite);
         }
 
     }
