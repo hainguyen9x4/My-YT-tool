@@ -166,6 +166,7 @@ function myFunctionSetStartDay() {
     day =Number(copyDay.value);
     console.log('start:'+day);
     setDay(day);
+    SaveToStorage();
 }
 function myFunctionCheckOK() {
     var copyValueOK = document.getElementById('checkOK');
@@ -194,6 +195,7 @@ function SaveToStorage(){
 function determineChannel(){
     var c = document.getElementById('Channel');
     navigator.clipboard.writeText(c.value);
+    SaveToStorage();
 }
 function myFunctionResetAll(){
     localStorage.clear();
@@ -201,6 +203,7 @@ function myFunctionResetAll(){
 }
 function determineMonth(){
     navigator.clipboard.writeText(document.getElementById('month').value);
+    SaveToStorage();
 }
 function determineOFF(){
     if(document.getElementById('turnOff').value === 'yes'){
