@@ -122,13 +122,14 @@ COMMENT : select time
 PLAY MACRO : function\Select-time-From-ClipBoard.mcr
 COMMENT : LEN LICH
 Mouse : 987 : 677 : Click : 0 : 0 : 0
-DELAY : 4000
+DELAY : 5000
 CLEAR CLIPBOARD
+DELAY : 50
 COMMENT : Copy link of YT video
 Mouse : 826 : 480 : Click : 0 : 0 : 0
-DELAY : 100
+DELAY : 50
 COMMENT : Check clip Board
-IF CLIPBOARD EQUALS : https://youtu.be/ : 0 : 1
+IF CLIPBOARD EQUALS : https : 0 : 1
 COMMENT : CLOSE-Dong
 Mouse : 837 : 519 : Click : 0 : 0 : 0
 ELSE
@@ -137,3 +138,4 @@ COMMENT : Go to right channel
 PLAY MACRO : function\correct-the-right-channel.mcr
 DELAY : 10000
 ENDIF
+GOTO : Start
