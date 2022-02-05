@@ -1,8 +1,26 @@
 LABEL : Start
-DELAY : 250
+DELAY : 200
+COMMENT : Check increase tab
+COMMENT : Go to increase tab
+Mouse : 270 : 18 : Click : 0 : 0 : 0
+DELAY : 30
+CLEAR CLIPBOARD
+COMMENT : Copy value 2022
+Mouse : 201 : 619 : Click : 0 : 0 : 0
+DELAY : 30
+IF CLIPBOARD EQUALS : 2022 : 1 : 0
+COMMENT : If value is not 2022
+COMMENT : Click to open the increase tab
+Mouse : 119 : 84 : Click : 0 : 0 : 0
+DELAY : 30
+Mouse : 126 : 228 : Click : 0 : 0 : 0
+DELAY : 30
+GOTO : Start
+ENDIF
+COMMENT : END-Check increase tab
 COMMENT : Go to YT tab
 Mouse : 38 : 19 : Click : 0 : 0 : 0
-DELAY : 250
+DELAY : 30
 COMMENT : Chon filter
 Mouse : 356 : 262 : Click : 0 : 0 : 0
 DELAY : 100
@@ -44,13 +62,13 @@ ENDIF
 COMMENT : Clear count re-start
 COMMENT : Go to increase tab
 Mouse : 267 : 15 : Click : 0 : 0 : 0
-DELAY : 50
+DELAY : 30
 COMMENT : Clear count re-start
 Mouse : 130 : 559 : Click : 0 : 0 : 0
-DELAY : 50
+DELAY : 30
 COMMENT : Return YT tab
 Mouse : 30 : 13 : Click : 0 : 0 : 0
-DELAY : 50
+DELAY : 30
 COMMENT : Tiep 1
 Mouse : 1013 : 672 : Click : 0 : 0 : 0
 DELAY : 350
@@ -65,17 +83,17 @@ Mouse : 384 : 555 : Click : 0 : 0 : 0
 DELAY : 10
 COMMENT : Open canladar
 Mouse : 493 : 453 : Click : 0 : 0 : 0
-DELAY : 90
+DELAY : 50
 COMMENT : Get Number count for next month
 COMMENT : Go to Increase tab
 Mouse : 273 : 19 : Click : 0 : 0 : 0
-DELAY : 90
+DELAY : 30
 COMMENT : Determine the number next month
 Mouse : 116 : 370 : Click : 0 : 0 : 0
-DELAY : 90
+DELAY : 30
 COMMENT : Go back to TY tab
 Mouse : 38 : 16 : Click : 0 : 0 : 0
-DELAY : 90
+DELAY : 30
 REPEAT : 0 : 0 : 1 : Enter the number of iterations: : 0 : 0
 COMMENT : next-month
 PLAY MACRO : function\next-month.mcr
@@ -119,10 +137,10 @@ COMMENT : Select day from clipboard
 PLAY MACRO : function\Select-Day-From-ClipBoard.mcr
 COMMENT : Change to increase tab
 Mouse : 269 : 17 : Click : 0 : 0 : 0
-DELAY : 100
+DELAY : 30
 COMMENT : Copy time
 Mouse : 209 : 140 : Click : 0 : 0 : 0
-DELAY : 100
+DELAY : 50
 ENDIF
 COMMENT : Return YT tab
 Mouse : 36 : 19 : Click : 0 : 0 : 0
@@ -130,7 +148,7 @@ COMMENT : select time
 PLAY MACRO : function\Select-time-From-ClipBoard.mcr
 COMMENT : LEN LICH
 Mouse : 987 : 677 : Click : 0 : 0 : 0
-DELAY : 2000
+DELAY : 2500
 REPEAT : 7 : 0 : 0 : Enter the number of iterations: : 0 : 0
 COMMENT : Copy link of YT video
 CLEAR CLIPBOARD
