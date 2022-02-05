@@ -204,6 +204,7 @@ function determineMonth(){
     var mm = today.getMonth() + 1;
     var nextNumber = 0;
     switch(parseInt(document.getElementById('month').value)){
+        case 4 :
         case 5 :
             nextNumber = document.getElementById('month').value - mm;
              break;
@@ -285,4 +286,15 @@ function myFunctionDetermineEndDay(){
 function determineEndDay(){
     myFunctionDetermineEndDay();
     navigator.clipboard.writeText(document.getElementById('endDay').innerHTML);
+}
+var count_restart =0;
+function myFunctionCountRestart(){
+    count_restart++;
+    if(count_restart > 15){
+        navigator.clipboard.writeText('NOT VALID!');
+    }
+}
+function myFunctionResetCountRestart(){
+    count_restart=0;
+    navigator.clipboard.writeText('');
 }
