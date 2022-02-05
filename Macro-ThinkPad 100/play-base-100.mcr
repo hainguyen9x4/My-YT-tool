@@ -68,7 +68,7 @@ DELAY : 90
 COMMENT : Go back to TY tab
 Mouse : 38 : 16 : Click : 0 : 0 : 0
 DELAY : 90
-REPEAT : 0 : 0 : 1 : Enter the number of iterations: : 0 : 0
+REPEAT : 2 : 0 : 1 : Enter the number of iterations: : 0 : 0
 COMMENT : next-month
 PLAY MACRO : function\next-month.mcr
 ENDREPEAT
@@ -122,7 +122,7 @@ COMMENT : select time
 PLAY MACRO : function\Select-time-From-ClipBoard.mcr
 COMMENT : LEN LICH
 Mouse : 987 : 677 : Click : 0 : 0 : 0
-DELAY : 50
+DELAY : 2000
 REPEAT : 7 : 0 : 0 : Enter the number of iterations: : 0 : 0
 COMMENT : Copy link of YT video
 CLEAR CLIPBOARD
