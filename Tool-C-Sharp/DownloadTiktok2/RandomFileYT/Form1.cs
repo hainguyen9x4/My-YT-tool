@@ -213,6 +213,7 @@ namespace RandomFileYT
             txtNumber.Text = "105";
             txtChangeName.Text = "ChangeName-";
             txtPathToMCR.Text = @"D:\Youtube\My-YT-tool\Macro-ThinkPad 100";
+            cb15Each.Checked = true;
             ReadLastTimeUploadOfChannel();
         }
 

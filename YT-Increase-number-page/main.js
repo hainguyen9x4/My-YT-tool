@@ -42,6 +42,7 @@ window.onload = function(e){
         year.value = '2022';
     }    
     myFunctionDetermineEndDay();
+    document.getElementById('countUp').innerHTML = countUpVideo;
 }
 var index = 0;
 var day = 1;
@@ -270,4 +271,31 @@ function myFunctionCountRestart(){
 function myFunctionResetCountRestart(){
     count_restart = 0;
     navigator.clipboard.writeText('');
+}
+var countUpVideo =0;
+function myFunctionResetCountUpVideo(){
+    countUpVideo = 0;
+    navigator.clipboard.writeText('');
+    document.getElementById('countUp').innerHTML = countUpVideo;
+}
+function myFunctionCountUpVideo(){
+    countUpVideo++;
+    navigator.clipboard.writeText('');
+    document.getElementById('countUp').innerHTML = countUpVideo;
+    if(countUpVideo > 8){
+        countUpVideo = 0;
+        //Change channel:
+        
+        let currentChannelIndex = document.getElementById('Channel').selectedIndex;
+        //console.log(currentChannelIndex);
+        document.getElementById('Channel').selectedIndex = currentChannelIndex+1;
+        
+        console.log(document.getElementById('Channel').value);
+        if(document.getElementById('Channel').value == 'Out'){
+            navigator.clipboard.writeText('EndUpVideo');
+        }else{
+            navigator.clipboard.writeText('NextNewChannel');
+        }
+
+    }
 }
