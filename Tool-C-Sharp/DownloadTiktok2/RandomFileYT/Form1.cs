@@ -117,7 +117,7 @@ namespace RandomFileYT
         }
         FileInfo[] Files;
         List<FileInfo> filesSelecteds15 = new List<FileInfo>();
-        private void btnExecute_Click(object sender, EventArgs e)
+        private void btnExecute_Click2(object sender, EventArgs e)
         {
             DirectoryInfo d = new DirectoryInfo(txtFolder.Text);
 
@@ -130,11 +130,7 @@ namespace RandomFileYT
                     File.SetAttributes(f.FullName, FileAttributes.Normal);
                 }
                 Random rd = new Random();
-                int maxNumber = int.Parse(txtNumber.Text) <= Files.Length ? int.Parse(txtNumber.Text) : Files.Length;
-                for (int i = 0; i < maxNumber; i++)
-                {
-                    filesSelecteds.Add(Files[rd.Next(0, Files.Length - 1)]);
-                }
+                int maxNumber = 0;
 
                 if (cb15Each.Checked)
                 {
@@ -161,6 +157,39 @@ namespace RandomFileYT
             else
             {
                 MessageBox.Show("There is no File!");
+            }
+        }
+        private void btnExecute_Click(object sender, EventArgs e)
+        {
+            DirectoryInfo d = new DirectoryInfo(txtFolder.Text);
+
+            List<FileInfo> filesSelecteds = new List<FileInfo>();
+            Files = d.GetFiles("*.mp4");
+            if (Files.Length > 0)
+            {
+                //foreach (var f in Files)
+                //{
+                //    File.SetAttributes(f.FullName, FileAttributes.Normal);
+                //}
+                int maxNumber = 0;
+                if (cb15Each.Checked)
+                {
+                    filesSelecteds15.Clear();
+                    maxNumber = 15 <= Files.Length ? 15 : Files.Length;
+                    for (int i = 0; i < maxNumber; i++)
+                    {
+                        filesSelecteds15.Add(Files[i]);
+                    }
+                }
+                //HideOtherFile(filesSelecteds15);
+                foreach (var f in filesSelecteds15)
+                {
+                    File.SetAttributes(f.FullName, FileAttributes.Normal);
+                }
+            }
+            else
+            {
+                MessageBox.Show("There is no File! Het file roi!!!!!!");
             }
         }
         private void HideOtherFile(List<FileInfo> filesSelecteds)
@@ -350,7 +379,15 @@ namespace RandomFileYT
                 Files = d.GetFiles("*.mp4");
                 foreach (var f in Files)
                 {
-                    File.SetAttributes(f.FullName, FileAttributes.Normal);
+                    if (!ckcHide.Checked)
+                    {
+
+                        File.SetAttributes(f.FullName, FileAttributes.Normal);
+                    }
+                    else
+                    {
+                        File.SetAttributes(f.FullName, FileAttributes.Hidden);
+                    }
                 }
                 if (filesSelecteds15 != null)
                 {
@@ -600,6 +637,24 @@ namespace RandomFileYT
                 Copy(directory, Path.Combine(targetDir, Path.GetFileName(directory)), isOverwrite);
         }
 
+        private void btnMove_Click(object sender, EventArgs e)
+        {
+            string destinationFile = "";
+            if (filesSelecteds15.Count > 0){
+                foreach (var file in filesSelecteds15)
+                {
+                    destinationFile = txtFolder.Text + @"-tmp\" + file.Name;
+                    try
+                    {
+                        File.Move(file.FullName, destinationFile);
+                    }
+                    catch (IOException iox)
+                    {
+                        Console.WriteLine(iox.Message);
+                    }
+                }
+            }
+        }
     }
     public class Location
     {

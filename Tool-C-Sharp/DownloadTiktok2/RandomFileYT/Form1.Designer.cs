@@ -49,6 +49,7 @@ namespace RandomFileYT
             this.btnResetAll = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnMove = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cb10Folders = new System.Windows.Forms.CheckBox();
             this.txtChangeName = new System.Windows.Forms.TextBox();
@@ -67,6 +68,7 @@ namespace RandomFileYT
             this.txtPathToMCR = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnEXE2MCR = new System.Windows.Forms.Button();
+            this.ckcHide = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -189,7 +191,7 @@ namespace RandomFileYT
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(158, 139);
+            this.button1.Location = new System.Drawing.Point(203, 139);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 36);
@@ -250,7 +252,7 @@ namespace RandomFileYT
             // 
             // btnResetAll
             // 
-            this.btnResetAll.Location = new System.Drawing.Point(297, 194);
+            this.btnResetAll.Location = new System.Drawing.Point(297, 200);
             this.btnResetAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnResetAll.Name = "btnResetAll";
             this.btnResetAll.Size = new System.Drawing.Size(90, 36);
@@ -272,6 +274,8 @@ namespace RandomFileYT
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.ckcHide);
+            this.tabPage1.Controls.Add(this.btnMove);
             this.tabPage1.Controls.Add(this.btnChon);
             this.tabPage1.Controls.Add(this.txtFolder);
             this.tabPage1.Controls.Add(this.btnResetAll);
@@ -296,6 +300,17 @@ namespace RandomFileYT
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Random file";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnMove
+            // 
+            this.btnMove.Location = new System.Drawing.Point(109, 139);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(90, 36);
+            this.btnMove.TabIndex = 17;
+            this.btnMove.Text = "Move";
+            this.btnMove.UseVisualStyleBackColor = true;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
             // 
             // tabPage2
             // 
@@ -495,6 +510,20 @@ namespace RandomFileYT
             this.btnEXE2MCR.UseVisualStyleBackColor = true;
             this.btnEXE2MCR.Click += new System.EventHandler(this.btnEXE2MCR_Click);
             // 
+            // ckcHide
+            // 
+            this.ckcHide.AutoSize = true;
+            this.ckcHide.BackColor = System.Drawing.Color.Transparent;
+            this.ckcHide.Checked = true;
+            this.ckcHide.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckcHide.Location = new System.Drawing.Point(297, 179);
+            this.ckcHide.Margin = new System.Windows.Forms.Padding(2);
+            this.ckcHide.Name = "ckcHide";
+            this.ckcHide.Size = new System.Drawing.Size(48, 17);
+            this.ckcHide.TabIndex = 18;
+            this.ckcHide.Text = "Hide";
+            this.ckcHide.UseVisualStyleBackColor = false;
+            // 
             // RandomFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -558,6 +587,8 @@ namespace RandomFileYT
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbStart;
         private System.Windows.Forms.CheckBox chkMove2EXE;
+        private System.Windows.Forms.Button btnMove;
+        private System.Windows.Forms.CheckBox ckcHide;
     }
 }
 
