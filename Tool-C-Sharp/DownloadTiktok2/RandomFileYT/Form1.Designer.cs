@@ -136,6 +136,7 @@ namespace RandomFileYT
             // cb15Each
             // 
             this.cb15Each.AutoSize = true;
+            this.cb15Each.Enabled = false;
             this.cb15Each.Location = new System.Drawing.Point(327, 110);
             this.cb15Each.Margin = new System.Windows.Forms.Padding(2);
             this.cb15Each.Name = "cb15Each";
@@ -173,7 +174,12 @@ namespace RandomFileYT
             "Anmation film (CatsFunnyAnimal)    -taikhoancv1",
             "Funny animal   (CatsFunnyAnimal)    -hainguyen9x4",
             "Animal film     (animalsTag)      -taikhoancv02",
-            "Hot lady         (CuteGirl)        -hai.nguyenvan0983"});
+            "Hot lady         (CuteGirl)        -hai.nguyenvan0983",
+            "Kova",
+            "Dia",
+            "NG",
+            "world",
+            "Animal life"});
             this.cmbChannel.Location = new System.Drawing.Point(63, 11);
             this.cmbChannel.Margin = new System.Windows.Forms.Padding(2);
             this.cmbChannel.Name = "cmbChannel";

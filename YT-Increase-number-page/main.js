@@ -282,7 +282,11 @@ function myFunctionCountUpVideo(){
     countUpVideo++;
     navigator.clipboard.writeText('');
     document.getElementById('countUp').innerHTML = countUpVideo;
-    if(countUpVideo > 8){
+    let currentChannel = document.getElementById('Channel').value;
+    if(countUpVideo > 8 || 
+        (countUpVideo == 1 && 
+            (currentChannel == 'Kova' || currentChannel == 'Animation' || currentChannel == 'Dia'||
+            currentChannel == 'NG'|| currentChannel == 'world'|| currentChannel == 'Animal life'))){
         countUpVideo = 0;
         //Change channel:
         
@@ -297,5 +301,14 @@ function myFunctionCountUpVideo(){
             navigator.clipboard.writeText('NextNewChannel');
         }
 
+    }
+}
+function increaseChannel(){
+    let currentChannelIndex = document.getElementById('Channel').selectedIndex;
+    document.getElementById('Channel').selectedIndex = currentChannelIndex+1;
+    if(document.getElementById('Channel').value == 'Out'){
+        navigator.clipboard.writeText('EndUpVideo');
+    }else{
+        navigator.clipboard.writeText(document.getElementById('Channel').value);
     }
 }

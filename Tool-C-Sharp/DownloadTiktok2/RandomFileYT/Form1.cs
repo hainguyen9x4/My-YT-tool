@@ -234,6 +234,21 @@ namespace RandomFileYT
                     break;
                 case 4: txtFolder.Text = @"D:\Youtube\CuteGirl";
                     break;
+                case 5://kova
+                    txtFolder.Text = @"D:\Youtube\animalsTag";
+                    break;
+                case 6://Dia
+                    txtFolder.Text = @"D:\Youtube\CatsFunnyAnimal";
+                    break;
+                case 7://NG
+                    txtFolder.Text = @"D:\Youtube\viral";
+                    break;
+                case 8://world
+                    txtFolder.Text = @"D:\Youtube\animalsTag";
+                    break;
+                case 9://Animal life
+                    txtFolder.Text = @"D:\Youtube\viral";
+                    break;
                 default:txtFolder.Text = "";
                     break;
             }
