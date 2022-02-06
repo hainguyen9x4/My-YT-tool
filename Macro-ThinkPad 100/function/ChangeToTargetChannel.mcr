@@ -169,7 +169,7 @@ IF ITERATION EQUALS : 2 : 0
 GOTO : Change to next Channel
 ENDIF
 COMMENT : Scroll the mouse
-Mouse : 1108 : 169 : Wheel : -7 : 0 : 0
+Mouse : 1108 : 169 : Wheel : -6 : 0 : 0
 DELAY : 500
 ENDREPEAT
 DELAY : 1000
@@ -180,7 +180,11 @@ Mouse : 271 : 19 : Click : 0 : 0 : 0
 DELAY : 40
 COMMENT : Click to increase channel
 Mouse : 275 : 312 : Click : 0 : 0 : 0
-DELAY : 30
+DELAY : 500
+COMMENT : Correct the random file
+PLAY MACRO : function\ExecuterandomFile.mcr
+DELAY : 500
+COMMENT : END-Correct the random file
 COMMENT : Back to YT tab
 Mouse : 25 : 15 : Click : 0 : 0 : 0
 DELAY : 40

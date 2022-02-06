@@ -281,7 +281,6 @@ function myFunctionResetCountUpVideo(){
 function myFunctionCountUpVideo(){
     countUpVideo++;
     navigator.clipboard.writeText('');
-    document.getElementById('countUp').innerHTML = countUpVideo;
     let currentChannel = document.getElementById('Channel').value;
     if(countUpVideo > 8 || 
         (countUpVideo == 1 && 
@@ -302,6 +301,7 @@ function myFunctionCountUpVideo(){
         }
 
     }
+    document.getElementById('countUp').innerHTML = countUpVideo;
 }
 function increaseChannel(){
     let currentChannelIndex = document.getElementById('Channel').selectedIndex;

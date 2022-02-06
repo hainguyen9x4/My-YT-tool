@@ -24,7 +24,7 @@ Mouse : 115 : 113 : Click : 0 : 0 : 0
 DELAY : 30
 ENDIF
 COMMENT : if channel is Animal
-IF CLIPBOARD EQUALS : Animal : 0 : 1
+IF CLIPBOARD EQUALS : Animal : 0 : 0
 COMMENT : Click Animal channel
 Mouse : 108 : 127 : Click : 0 : 0 : 0
 DELAY : 30
@@ -60,14 +60,16 @@ Mouse : 88 : 188 : Click : 0 : 0 : 0
 DELAY : 700
 ENDIF
 COMMENT : if channel is Animal life
-IF CLIPBOARD EQUALS : Animal life : 0 : 1
+IF CLIPBOARD EQUALS : Animal life : 0 : 0
 COMMENT : Click Animal life channel
-Mouse : 90 : 202 : Click : 0 : 0 : 0
+Mouse : 91 : 203 : Click : 0 : 0 : 0
 DELAY : 700
 ENDIF
 COMMENT : Click execute
 Mouse : 66 : 203 : Click : 0 : 0 : 0
 DELAY : 30
+SWITCH TO WINDOW : YouTube - Google Chrome : 0
+DELAY : 100
 SWITCH TO WINDOW : Trang tổng quan của kênh - YouTube Studio - Google Chrome : 0
 DELAY : 100
 COMMENT : END_Prepare random file

@@ -22,26 +22,26 @@ Mouse : 135 : 182 : Click : 0 : 0 : 0
 DELAY : 5500
 ENDIF
 IF CLIPBOARD EQUALS : Smile : 0 : 0
-Mouse : 132 : 205 : Click : 0 : 0 : 0
+Mouse : 131 : 206 : Click : 0 : 0 : 0
 DELAY : 5500
 ENDIF
 IF CLIPBOARD EQUALS : Kova : 0 : 0
-Mouse : 141 : 377 : Click : 0 : 0 : 0
+Mouse : 129 : 371 : Click : 0 : 0 : 0
 DELAY : 5500
 ENDIF
 IF CLIPBOARD EQUALS : Dia : 0 : 0
-Mouse : 126 : 309 : Click : 0 : 0 : 0
+Mouse : 133 : 298 : Click : 0 : 0 : 0
 DELAY : 5500
 ENDIF
 IF CLIPBOARD EQUALS : NG : 0 : 0
-Mouse : 129 : 328 : Click : 0 : 0 : 0
+Mouse : 145 : 325 : Click : 0 : 0 : 0
 DELAY : 5500
 ENDIF
 IF CLIPBOARD EQUALS : world : 0 : 0
-Mouse : 127 : 352 : Click : 0 : 0 : 0
+Mouse : 150 : 341 : Click : 0 : 0 : 0
 DELAY : 5500
 ENDIF
 IF CLIPBOARD EQUALS : Animal life : 0 : 0
-Mouse : 122 : 283 : Click : 0 : 0 : 0
+Mouse : 167 : 278 : Click : 0 : 0 : 0
 DELAY : 5500
 ENDIF
